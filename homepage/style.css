@@ -41,6 +41,21 @@ body {
     /* 250px del menu + 15px di gap */
 }
 
+/* Versione mobile */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .mainContent {
+        margin-right: 20px;
+        margin-left: 20px;
+        padding: 5px;
+        max-width: none;
+    }
+}
+
 .mainContent2 {
     border-radius: 20px;
     background-color: #474646;

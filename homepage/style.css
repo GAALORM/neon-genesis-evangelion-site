@@ -6,6 +6,16 @@ body {
     background-attachment: fixed;
 }
 
+/* Versione mobile */
+@media screen and (max-width: 768px) {
+    body {
+        background-size: cover;
+        background-position-x: center;
+        background-position-y: center;
+        background-attachment: scroll;
+    }
+}
+
 .container {
     display: flex;
     align-items: flex-start;

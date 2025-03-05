@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risultati di ricerca</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="mainContent3">
+        <div class="results-container">
+            <form id="searchForm" class="search-bar">
+                <input type="text" id="searchInput" placeholder="Cerca..." />
+                <button id="searchButton">
+                    <span class="search-icon">🔍</span>
+                </button>
+                <div class="suggestions" id="suggestions-box"></div>
+            </form>
+            <h2 class="h2risultati">Risultati della ricerca</h2>
+            <div id="suggestion-box" class="suggestion"></div>
+            <div class="query-title">
+                Ricerca per: <strong><span id="search-query"></span></strong>
+            </div>
+            <div id="corrected-query" class="corrected-query">
+                <em>Forse cercavi</em>: <a href="#" id="corrected-link" class="corrected-link"></a>
+            </div>
+            <div id="results-list"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

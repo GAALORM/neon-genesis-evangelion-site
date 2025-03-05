@@ -14,11 +14,6 @@ body {
         background-attachment: scroll;
         min-height: 100vh;
     }
-    
-    /* Aggiungi debug */
-    body {
-        outline: 2px solid rgba(255,0,0,0.5);
-    }
 }
 
 .container {
@@ -46,6 +41,8 @@ body {
     #imgIndex {
         width: 100%;
         max-width: 300px;
+         margin-left: -20px;
+        margin-right: 0;
     }
 }
 

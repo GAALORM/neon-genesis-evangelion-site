@@ -55,6 +55,15 @@ body {
     padding: 10px;
 }
 
+/* Versione mobile */
+@media screen and (max-width: 768px) {
+    .mainContent2 {
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 5px;
+    }
+}
+
 .mainContent3 {
     border-radius: 20px;
     background-color: #474646;

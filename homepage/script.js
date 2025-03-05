@@ -252,7 +252,6 @@ function displayResults() {
     }).join("");
 }
 
-
 // Array per memorizzare le ricerche recenti
 let recentSearches = [];
 

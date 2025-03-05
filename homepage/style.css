@@ -6,13 +6,18 @@ body {
     background-attachment: fixed;
 }
 
-/* Versione mobile */
 @media screen and (max-width: 768px) {
     body {
         background-size: cover;
         background-position-x: center;
         background-position-y: center;
         background-attachment: scroll;
+        min-height: 100vh;
+    }
+    
+    /* Aggiungi debug */
+    body {
+        outline: 2px solid rgba(255,0,0,0.5);
     }
 }
 

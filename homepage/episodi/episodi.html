@@ -10,12 +10,13 @@
 
 <body>
     <div class="mainContent2">
-        <div class="search-bar">
-            <input type="text" placeholder="Cerca nel sito..." id="searchInput">
+        <form id="searchForm" class="search-bar">
+            <input type="text" id="searchInput" placeholder="Cerca..." />
             <button id="searchButton">
                 <span class="search-icon">🔍</span>
             </button>
-        </div>
+            <div class="suggestions" id="suggestions-box"></div>
+        </form>
         <p class="browserParagraph">In: <a class="mainLinks" href="../index.html">Home</a></p>
         <div class="firstInnerDiv">
             <h3 class="sectionTitle">In questa sezione vi sono le pagine dedicate agli episodi della serie</h3>

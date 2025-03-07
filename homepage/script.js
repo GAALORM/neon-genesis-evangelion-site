@@ -1,3 +1,14 @@
+// Aggiungi questa riga all'inizio del tuo file script.js
+let timeoutId = null;
+
+// Aggiungi questo codice all'inizio del tuo file
+document.addEventListener('DOMContentLoaded', function() {
+    cleanupTimeouts(); // Pulisci eventuali timeout residui
+    
+    // Aggiungi questo per pulire i timeout quando cambi pagina
+    window.addEventListener('beforeunload', cleanupTimeouts);
+});
+
 // Definizione di `query`, se non è già definita
 let query = new URLSearchParams(window.location.search).get("q") || "";
 
@@ -345,11 +356,22 @@ if (searchInput) {
         searchInput.setAttribute("placeholder", searchInput.getAttribute("data-placeholder"));
     });
 
-    searchInput.addEventListener("input", function () {
+  // Modifica l'evento input per gestire meglio i timeout
+searchInput.addEventListener("input", function() {
+    if (timeoutId) {
+        clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
         updateSuggestionsBox(searchInput.value.toLowerCase());
-    });
-} else {
-    console.warn("Elemento #searchInput non trovato nel DOM.");
+    }, 150);
+});
+
+    // Aggiungi questa funzione per pulire i timeout quando cambi pagina
+function cleanupTimeouts() {
+    if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+    }
 }
 
 
@@ -358,32 +380,32 @@ const suggestionsBox = document.getElementById("suggestions-box");
 function updateSuggestionsBox(query) {
     let htmlContent = "";
     if (query.length === 0) {
-        htmlContent += recentSearches.length === 0
-            ? `<div class="recent-title"><strong>Ricerche recenti</strong></div><div class="recent-item" style="color: #aaa;">Nessuna ricerca recente</div>`
-            : `<div class="recent-title"><strong>Ricerche recenti</strong></div>` + 
-              recentSearches.map((search, index) => 
-                `<div class="recent-item" data-item="${search}">${search}<button class="remove-recent" data-index="${index}">X</button></div>`
-              ).join("")
-        ;
+        htmlContent = "<div style='color: #aaa;'>Inizia a digitare per vedere i suggerimenti...</div>";
+    } else {
+        const filteredPages = fuzzySearch(query, sitePages);
+        if (filteredPages.length > 0) {
+            const bestMatch = filteredPages[0];
+            htmlContent += `<div class="suggestion-highlight" data-item="${bestMatch}">${bestMatch}</div>`;
+            filteredPages.slice(1).forEach(page => {
+                htmlContent += `<div class="suggestion-item" data-item="${page}">${page}</div>`;
+            });
+        } else {
+            // Mostra suggerimenti più generici se non ci sono risultati esatti
+            const partialMatches = sitePages.filter(page => 
+                page.toLowerCase().includes(query.toLowerCase())
+            );
+            if (partialMatches.length > 0) {
+                htmlContent = "<div style='color: #666;'>Risultati parziali:</div>";
+                partialMatches.forEach(page => {
+                    htmlContent += `<div class="suggestion-item" data-item="${page}">${page}</div>`;
+                });
+            } else {
+                htmlContent = "<div style='color: #aaa;'>Nessun risultato trovato</div>";
+            }
+        }
     }
-    
-    const filteredPages = fuzzySearch(query, sitePages);
-    if (filteredPages.length > 0 && query.length > 0) {
-        // Aggiungi il risultato più pertinente in alto
-        const bestMatch = filteredPages[0];
-        htmlContent += `<div class="suggestion-highlight" data-item="${bestMatch}">${bestMatch}</div>`;
-        
-        // Aggiungi gli altri suggerimenti
-        htmlContent += filteredPages.slice(1).map(page => 
-            `<div class="suggestion-item" data-item="${page}">${page}</div>`
-        ).join("");
-    } else if (query.length > 0) {
-        htmlContent += `<div style="color: #aaa;">Nessun risultato trovato</div>`;
-    }
-    
-    suggestionsBox.innerHTML = htmlContent.trim() ? htmlContent : "";
-    suggestionsBox.style.display = htmlContent.trim() ? "block" : "none";
-    attachRecentSearchClickEvents();
+    suggestionsBox.innerHTML = htmlContent;
+    suggestionsBox.style.display = htmlContent ? "block" : "none";
 }
 
 function soundex(s) {
@@ -437,66 +459,31 @@ function metaphone(word) {
         .replace(/(.)\1+/g, '$1'); // Rimuove lettere doppie
 }
 
-
 function fuzzySearch(query, items) {
     if (!query) return [];
     
-    // Calcola i codici fonetici per la query
-    const querySoundex = soundex(query);
-    const queryMetaphone = metaphone(query);
     const queryLower = query.toLowerCase();
     
-    // Calcola i punteggi per ogni elemento
-    return items.map(item => {
-        const itemLower = item.toLowerCase();
-        const itemSoundex = soundex(itemLower);
-        const itemMetaphone = metaphone(itemLower);
-        
-        // Calcola la similarità Levenshtein
-        const similarity = 1 - levenshteinDistance(queryLower, itemLower) / Math.max(itemLower.length, queryLower.length);
-        
-        // Aggiungi bonus per corrispondenze esatte
-        const exactMatchBonus = itemLower === queryLower ? 0.8 : 0;
-        
-        return {
-            item,
-            similarity: similarity + exactMatchBonus,
-            soundexMatch: itemSoundex === querySoundex,
-            metaphoneMatch: itemMetaphone === queryMetaphone
-        };
-    })
-    // Filtra i risultati basandosi sui criteri di corrispondenza
-    .filter(entry => {
-        // Accetta corrispondenze esatte
-        if (entry.soundexMatch && entry.metaphoneMatch) return true;
-        // Accetta corrispondenze fonetiche con alta similarità
-        if (entry.soundexMatch || entry.metaphoneMatch) return entry.similarity >= 0.6;
-        // Accetta similarità elevata
-        return entry.similarity >= 0.8;
-    })
-    // Ordina i risultati per rilevanza
-    .sort((a, b) => {
-        // Priorità per corrispondenze esatte
-        const aExact = a.soundexMatch && a.metaphoneMatch;
-        const bExact = b.soundexMatch && b.metaphoneMatch;
-        
-        if (aExact && !bExact) return -1;
-        if (!aExact && bExact) return 1;
-        
-        // Punteggio complessivo basato su tutti i criteri
-        const aScore = (a.soundexMatch ? 1 : 0) + 
-                      (a.metaphoneMatch ? 1 : 0) + 
-                      a.similarity;
-        const bScore = (b.soundexMatch ? 1 : 0) + 
-                      (b.metaphoneMatch ? 1 : 0) + 
-                      b.similarity;
-        
-        return bScore - aScore;
-    })
-    // Restituisce solo gli elementi originali
-    .map(entry => entry.item);
+    // Calcola la similarità con un algoritmo più permissivo
+    return items
+        .map(item => {
+            const itemLower = item.toLowerCase();
+            const similarity = 1 - levenshteinDistance(queryLower, itemLower) / 
+                             Math.max(itemLower.length, queryLower.length);
+            
+            // Aggiungi bonus per corrispondenze parziali
+            const partialMatch = itemLower.includes(queryLower);
+            const similarityBonus = partialMatch ? 0.3 : 0;
+            
+            return {
+                item,
+                similarity: similarity + similarityBonus
+            };
+        })
+        .filter(entry => entry.similarity >= 0.4) // Soglia più bassa
+        .sort((a, b) => b.similarity - a.similarity)
+        .map(entry => entry.item);
 }
-
 
 async function extractSnippetFromPage(path, query) {
     try {
@@ -545,38 +532,42 @@ async function extractSnippetFromPage(path, query) {
     }
 }
 
+// Modifica la funzione handleSearch per includere la pulizia
 async function handleSearch(query) {
+    cleanupTimeouts(); // Pulisci i timeout all'inizio
     query = query.trim();
     if (!query) return;
-
+    
     if (!recentSearches.includes(query)) {
         recentSearches.unshift(query);
         recentSearches = recentSearches.slice(0, 3);
         saveRecentSearches();
-        updateRecentSearches(); // Aggiorna la UI dopo aver salvato
+        updateRecentSearches();
     }
-
+    
     let suggestions = fuzzySearch(query, sitePages);
     let bestMatch = suggestions.length > 0 ? suggestions[0] : null;
     let finalResults = suggestions.slice(0, 4);
-
-    // Verifica se la parola corretta è diversa dalla query inserita
-    const correctedQuery = bestMatch && bestMatch.toLowerCase() !== query.toLowerCase() ? bestMatch : null;
-
+    
+    const correctedQuery = bestMatch && 
+        bestMatch.toLowerCase() !== query.toLowerCase() ? bestMatch : null;
+    
     if (finalResults.length < 4) {
-        finalResults = finalResults.concat(sitePages.filter(page => !finalResults.includes(page)).slice(0, 4 - finalResults.length));
+        finalResults = finalResults.concat(
+            sitePages.filter(page => !finalResults.includes(page))
+                .slice(0, 4 - finalResults.length)
+        );
     }
-
+    
     const resultsWithSnippets = await Promise.all(finalResults.map(async page => {
         const path = pagePaths[page];
         return {
             title: page,
             path: path || "#",
-            snippet: path ? await extractSnippetFromPage(path, correctedQuery || query) : "Nessun contenuto disponibile",
+            snippet: path ? await extractSnippetFromPage(path, correctedQuery || query) : "Nessun contenuto disponibile"
         };
     }));
-
-    // Reindirizza ai risultati includendo anche la query corretta se presente
+    
     window.location.href = `/homepage/risultati.html?q=${encodeURIComponent(query)}&results=${encodeURIComponent(JSON.stringify(resultsWithSnippets))}${correctedQuery ? `&corrected=${encodeURIComponent(correctedQuery)}` : ''}`;
 }
 

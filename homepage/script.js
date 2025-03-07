@@ -590,29 +590,31 @@ document.addEventListener("click", function (event) {
     }
 });
 
-    function hideSuggestions(event) {
+    // Funzione per nascondere suggestionsBox quando si clicca fuori
+function hideSuggestions(event) {
     const suggestionsBox = document.getElementById("suggestions-box");
     const searchInput = document.getElementById("searchInput");
 
-    if (suggestionsBox && searchInput) {
+    if (suggestionsBox && searchInput) { 
         if (!suggestionsBox.contains(event.target) && event.target !== searchInput) {
             suggestionsBox.style.display = "none";
         }
     }
 }
 
+// Aggiungi l'evento click
 document.addEventListener("click", hideSuggestions);
 
-// Riprova a collegare l'evento se l'elemento viene creato dinamicamente
+// Observer per rilevare se suggestionsBox viene creato dinamicamente
 const observer = new MutationObserver(() => {
     if (document.getElementById("suggestions-box")) {
         document.addEventListener("click", hideSuggestions);
-        observer.disconnect(); // Interrompe l'osservazione una volta che l'elemento è trovato
+        observer.disconnect(); // Interrompe l'osservazione una volta trovato
     }
 });
 
+// Inizia a osservare il corpo della pagina per nuovi elementi
 observer.observe(document.body, { childList: true, subtree: true });
-
     
 displayResults();
 

@@ -590,6 +590,30 @@ document.addEventListener("click", function (event) {
     }
 });
 
+    function hideSuggestions(event) {
+    const suggestionsBox = document.getElementById("suggestions-box");
+    const searchInput = document.getElementById("searchInput");
+
+    if (suggestionsBox && searchInput) {
+        if (!suggestionsBox.contains(event.target) && event.target !== searchInput) {
+            suggestionsBox.style.display = "none";
+        }
+    }
+}
+
+document.addEventListener("click", hideSuggestions);
+
+// Riprova a collegare l'evento se l'elemento viene creato dinamicamente
+const observer = new MutationObserver(() => {
+    if (document.getElementById("suggestions-box")) {
+        document.addEventListener("click", hideSuggestions);
+        observer.disconnect(); // Interrompe l'osservazione una volta che l'elemento è trovato
+    }
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+    
 displayResults();
 
 

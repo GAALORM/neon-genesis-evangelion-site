@@ -357,29 +357,34 @@ const suggestionsBox = document.getElementById("suggestions-box");
 
 function updateSuggestionsBox(query) {
     let htmlContent = "";
-
     if (query.length === 0) {
         htmlContent += recentSearches.length === 0
             ? `<div class="recent-title"><strong>Ricerche recenti</strong></div><div class="recent-item" style="color: #aaa;">Nessuna ricerca recente</div>`
-            : `<div class="recent-title"><strong>Ricerche recenti</strong></div>` +
-            recentSearches.map((search, index) => `<div class="recent-item" data-item="${search}">${search}<button class="remove-recent" data-index="${index}">X</button></div>`).join("");
+            : `<div class="recent-title"><strong>Ricerche recenti</strong></div>` + 
+              recentSearches.map((search, index) => 
+                `<div class="recent-item" data-item="${search}">${search}<button class="remove-recent" data-index="${index}">X</button></div>`
+              ).join("")
+        ;
     }
-
+    
     const filteredPages = fuzzySearch(query, sitePages);
     if (filteredPages.length > 0 && query.length > 0) {
-        htmlContent += filteredPages.map(page => `<div class="suggestion-item" data-item="${page}">${page}</div>`).join("");
+        // Aggiungi il risultato più pertinente in alto
+        const bestMatch = filteredPages[0];
+        htmlContent += `<div class="suggestion-highlight" data-item="${bestMatch}">${bestMatch}</div>`;
+        
+        // Aggiungi gli altri suggerimenti
+        htmlContent += filteredPages.slice(1).map(page => 
+            `<div class="suggestion-item" data-item="${page}">${page}</div>`
+        ).join("");
     } else if (query.length > 0) {
         htmlContent += `<div style="color: #aaa;">Nessun risultato trovato</div>`;
     }
-
+    
     suggestionsBox.innerHTML = htmlContent.trim() ? htmlContent : "";
     suggestionsBox.style.display = htmlContent.trim() ? "block" : "none";
     attachRecentSearchClickEvents();
 }
-
-searchInput.addEventListener("input", function () {
-    updateSuggestionsBox(searchInput.value.toLowerCase());
-});
 
 function soundex(s) {
     const codes = {

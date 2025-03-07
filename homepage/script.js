@@ -435,28 +435,61 @@ function metaphone(word) {
 
 function fuzzySearch(query, items) {
     if (!query) return [];
-
+    
+    // Calcola i codici fonetici per la query
     const querySoundex = soundex(query);
     const queryMetaphone = metaphone(query);
     const queryLower = query.toLowerCase();
-
+    
+    // Calcola i punteggi per ogni elemento
     return items.map(item => {
         const itemLower = item.toLowerCase();
         const itemSoundex = soundex(itemLower);
         const itemMetaphone = metaphone(itemLower);
-
-        // Confronto Soundex e Metaphone
-        const soundexMatch = itemSoundex === querySoundex;
-        const metaphoneMatch = itemMetaphone === queryMetaphone;
-
-        // Similarità Levenshtein (range 0.0 - 1.0)
+        
+        // Calcola la similarità Levenshtein
         const similarity = 1 - levenshteinDistance(queryLower, itemLower) / Math.max(itemLower.length, queryLower.length);
-
-        return { item, similarity, soundexMatch, metaphoneMatch };
+        
+        // Aggiungi bonus per corrispondenze esatte
+        const exactMatchBonus = itemLower === queryLower ? 0.8 : 0;
+        
+        return {
+            item,
+            similarity: similarity + exactMatchBonus,
+            soundexMatch: itemSoundex === querySoundex,
+            metaphoneMatch: itemMetaphone === queryMetaphone
+        };
     })
-        .filter(entry => entry.soundexMatch || entry.metaphoneMatch || entry.similarity >= 0.2)
-        .sort((a, b) => (b.soundexMatch + b.metaphoneMatch + b.similarity) - (a.soundexMatch + a.metaphoneMatch + a.similarity))
-        .map(entry => entry.item);
+    // Filtra i risultati basandosi sui criteri di corrispondenza
+    .filter(entry => {
+        // Accetta corrispondenze esatte
+        if (entry.soundexMatch && entry.metaphoneMatch) return true;
+        // Accetta corrispondenze fonetiche con alta similarità
+        if (entry.soundexMatch || entry.metaphoneMatch) return entry.similarity >= 0.6;
+        // Accetta similarità elevata
+        return entry.similarity >= 0.8;
+    })
+    // Ordina i risultati per rilevanza
+    .sort((a, b) => {
+        // Priorità per corrispondenze esatte
+        const aExact = a.soundexMatch && a.metaphoneMatch;
+        const bExact = b.soundexMatch && b.metaphoneMatch;
+        
+        if (aExact && !bExact) return -1;
+        if (!aExact && bExact) return 1;
+        
+        // Punteggio complessivo basato su tutti i criteri
+        const aScore = (a.soundexMatch ? 1 : 0) + 
+                      (a.metaphoneMatch ? 1 : 0) + 
+                      a.similarity;
+        const bScore = (b.soundexMatch ? 1 : 0) + 
+                      (b.metaphoneMatch ? 1 : 0) + 
+                      b.similarity;
+        
+        return bScore - aScore;
+    })
+    // Restituisce solo gli elementi originali
+    .map(entry => entry.item);
 }
 
 

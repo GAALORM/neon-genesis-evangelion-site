@@ -632,3 +632,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     displayResults();
 });
+

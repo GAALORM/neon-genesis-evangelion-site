@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personaggi</title>
     <link rel="stylesheet" href="../style.css">
-    <script src="../../script.js" defer></script>
+    <script src="../script.js" defer></script>
     <script src="https://kit.fontawesome.com/f5fadd4ca1.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="mainContent2">
-        <div class="search-bar">
-            <input type="text" placeholder="Cerca nel sito..." id="searchInput">
+        <form id="searchForm" class="search-bar">
+            <input type="text" id="searchInput" placeholder="Cerca..." />
             <button id="searchButton">
                 <span class="search-icon">🔍</span>
             </button>
-        </div>
+            <div class="suggestions" id="suggestions-box"></div>
+        </form>
         <p class="browserParagraph">In: <a class="mainLinks" href="../index.html">Home</a></p>
         <div class="firstInnerDiv">
             <h3 class="sectionTitle">In questa sezione vi è l' elenco degli personaggi comparsi durante la serie, divisi per categoria.</h3>
@@ -182,7 +183,7 @@
                         <a class="mainLinks" href="piloti/rei.html">Rei Ayanami</a>
                     </div>
                     <div class=" galleryPersonaggi-item">
-                        <img src="../img/asuka.jpg" alt="Asuka Sōryū Langley">
+                        <img src="../img/asuka.png" alt="Asuka Sōryū Langley">
                         <a class="mainLinks" href="piloti/asuka.html">Asuka Sōryū Langley</a>
                     </div>
                     <div class="galleryPersonaggi-item">

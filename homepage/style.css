@@ -17,8 +17,11 @@ body {
 
 .container2 {
     display: flex;
-    margin: auto;
-    text-align: center;
+    flex-wrap: wrap;
+    /* Permette di adattarsi su schermi piccoli */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .mainContent {
@@ -42,6 +45,12 @@ body {
 }
 
 .mainContent2 {
+    width: 90%;
+    /* Imposta una larghezza fluida */
+    max-width: 1200px;
+    /* Limita la larghezza su schermi grandi */
+    margin: auto;
+    /* Centra il contenuto */
     border-radius: 20px;
     background-color: #474646;
     display: flex;
@@ -49,22 +58,24 @@ body {
     /* Centra orizzontalmente */
     flex-direction: column;
     /* allinea i div annidati uno sotto l' altro */
-    margin-top: 25px;
-    margin-left: 200px;
-    margin-right: 200px;
     padding: 10px;
 }
 
+
 .mainContent3 {
+    width: 90%;
+    /* Imposta una larghezza fluida */
+    max-width: 1200px;
+    /* Limita la larghezza su schermi grandi */
+    margin: auto;
+    /* Centra il contenuto */
+    padding: 10px;
+    /* Evita che tocchi i bordi */
     border-radius: 20px;
     background-color: #474646;
     text-align: center;
     flex-direction: column;
     /* allinea i div annidati uno sotto l' altro */
-    margin-top: 25px;
-    margin-left: 250px;
-    margin-right: 250px;
-    padding: 10px;
 }
 
 .firstInnerDiv {
@@ -447,18 +458,15 @@ sup {
     /* Allinea verticalmente al centro */
 }
 
-.firstSpan {
-    color: #90AAC3;
-}
-
 .secondSpan {
     color: #E6E6E6;
 }
 
 .column1 {
-    width: 400px;
-    height: auto;
-    margin: 10px;
+    width: 50%;
+    /* Occupa metà dello schermo su desktop */
+    min-width: 280px;
+    /* Previene il collasso su schermi piccoli */
 }
 
 .column2 {
@@ -469,10 +477,13 @@ sup {
 }
 
 #imgIndex {
-    margin-top: 25px;
-    margin-bottom: 20px;
+    width: 100%;
+    /* L'immagine si ridimensiona in base allo schermo */
+    max-width: 500px;
+    height: auto;
+    /* Mantiene le proporzioni */
+    border: 2px solid #E6E6E6;
     border-radius: 20px;
-    border: 2px ridge #E6E6E6;
 }
 
 .firstImage-box {
@@ -711,15 +722,26 @@ sup {
 }
 
 .results-container {
+    width: 100%;
+    max-width: 800px;
+    /* Mantiene i risultati leggibili */
+    margin: auto;
+    padding: 10px;
     display: inline-block;
     /* Adatta la larghezza al contenuto */
-    padding: 10px;
     text-align: left;
-    /* Evita che il testo sia centrato nel div figlio */
-    max-width: 90vw;
+}
+
+#results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
 }
 
 .suggestion {
+    font-size: 1rem;
+    padding: 5px;
     margin-bottom: 15px;
     color: #d9534f;
     font-weight: bold;
@@ -770,6 +792,9 @@ sup {
 }
 
 .query-title {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10px;
     margin-bottom: 15px;
     color: #B388EB;
     font-family: sans-serif;
@@ -787,17 +812,22 @@ sup {
 }
 
 .corrected-query {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10px;
     color: #E6E6E6;
     display: none;
     margin-bottom: 10px;
 }
 
 .h2risultati {
+    font-size: 2rem;
+    text-align: center;
     color: #E6E6E6;
 }
 
 /* Adattamenti solo per mobile */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
 
     /* Layout mobile */
     .container {
@@ -805,28 +835,104 @@ sup {
         gap: 10px;
     }
 
-    .mainContent {
-        margin-right: 10px;
-        margin-left: 10px;
-        max-width: none;
+    .container2 {
+        flex-direction: column;
+        /* Stack verticale su mobile */
+        align-items: center;
     }
 
-    /* Gallerie mobile */
-    .galleryPersonaggi,
-    .galleryLuoghi,
-    .galleryTerminologia,
-    .galleryTecnologia,
-    .galleryEpisodi {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    /* Barra di ricerca mobile */
+    .search-bar input {
+        padding: 10px 30px 10px 15px;
+    }
+
+    .column1 {
+        width: 100%;
+        /* Le categorie occupano tutta la larghezza */
+        text-align: center;
+    }
+
+    .titleIndex {
+        font-size: 1.5rem;
+        /* Riduce il titolo */
+    }
+
+    .sectionTitle {
+        font-size: 1.2rem;
+    }
+
+    #searchInput {
+        font-size: 0.9rem;
+    }
+
+    .mainContent,
+    .mainContent2,
+    .mainContent3 {
+        width: 95%;
+        margin: auto;
         padding: 10px;
     }
 
-    /* Menu mobile */
-    .navMenu-wrapper {
+    .h2risultati {
+        font-size: 1.5rem;
+        /* Riduce il titolo */
+    }
+
+    .query-title,
+    .corrected-query {
+        font-size: 1rem;
+    }
+
+    #searchInput {
+        font-size: 0.9rem;
+    }
+
+    .results-container {
+        padding: 5px;
+    }
+
+    .galleryPersonaggi,
+    .galleryTecnologia,
+    .galleryLuoghi,
+    .galleryEpisodi,
+    .galleryTerminologia,
+    .galleryEventi {
+        grid-template-columns: 1fr;
+        /* Una colonna sola su mobile */
+    }
+
+    .galleryPersonaggi-item img,
+    .galleryTecnologia-item img,
+    .galleryLuoghi-item img,
+    .galleryTerminologia-item img,
+    .galleryEpisodi-item img,
+    .galleryEventi-item img {
         width: 100%;
-        position: fixed;
-        bottom: 0;
-        top: auto;
+        /* L'immagine si adatta alla larghezza del contenitore */
+        max-width: 300px;
+        /* Evita che diventi troppo grande */
+        height: auto;
+        /* Mantiene le proporzioni */
+    }
+
+    .galleryEventi-item img {
+        max-width: 400px;
+        /* L'immagine degli eventi può essere un po' più grande */
+    }
+
+    .navMenu-wrapper {
+        max-width: 80%;
+        /* Limita la larghezza al massimo all'80% dello schermo */
+        left: 10px;
+        transform: none;
+        right: auto;
+        background-color: rgba(71, 70, 70, 0.9);
+        /* Sfondo semi-trasparente */
+        text-align: center;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .navMenu {
@@ -834,10 +940,52 @@ sup {
         height: auto;
         max-height: calc(100vh - 100px);
         padding: 10px;
+        overflow-y: auto;
     }
 
-    /* Barra di ricerca mobile */
-    .search-bar input {
-        padding: 10px 30px 10px 15px;
+    .sectionIndex {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
     }
+
+    .secondSpan {
+        font-size: 1.2rem;
+        /* Riduce leggermente le icone */
+    }
+
+    .linksHomepage {
+        font-size: 1rem;
+        margin-left: 0;
+        /* Evita lo spostamento laterale */
+    }
+
+    /* 📌 Adatta le immagini secondarie */
+    .secondImage-box {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .secondImage-box img {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+    }
+
+    .fifthImage-box {
+        flex-direction: column;
+        /* Dispone le immagini in colonna */
+        align-items: center;
+        /* Centra le immagini */
+        gap: 20px;
+        /* Riduce lo spazio tra le immagini */
+    }
+
+    .fifthImage-box img {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+    }
+
 }

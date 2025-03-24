@@ -596,7 +596,7 @@ sup {
 .search-bar {
     position: relative;
     /* Permette il posizionamento assoluto della lente */
-    width: 100%;
+    width: 50%;
     margin: 0 auto 20px;
     /* Centra la barra */
 }

@@ -831,6 +831,7 @@ sup {
 
     /* Layout mobile */
     .container {
+        display: flex;
         flex-direction: column;
         gap: 10px;
     }
@@ -865,7 +866,13 @@ sup {
         font-size: 0.9rem;
     }
 
-    .mainContent,
+    .mainContent {
+         width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+    }
+    
     .mainContent2,
     .mainContent3 {
         width: 95%;
@@ -921,18 +928,18 @@ sup {
     }
 
     .navMenu-wrapper {
-        max-width: 80%;
+        max-width: 100%;
         /* Limita la larghezza al massimo all'80% dello schermo */
         left: 10px;
-        transform: none;
         right: auto;
+        transform: none;
         background-color: rgba(71, 70, 70, 0.9);
         /* Sfondo semi-trasparente */
         text-align: center;
         padding: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: block;
+        justify-content: initial;
+        align-items: initial;
     }
 
     .navMenu {

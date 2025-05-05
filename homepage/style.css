@@ -831,8 +831,8 @@ sup {
 
     /* Layout mobile */
     .container {
-        display: flex;
-        flex-direction: column;
+          flex-direction: row;
+        flex-wrap: wrap;
         gap: 10px;
     }
 
@@ -867,8 +867,9 @@ sup {
     }
 
     .mainContent {
-         width: 100%;
-    margin: 0 auto;
+  width: 70%;
+        max-width: 70%;
+        margin: 0 auto;
     padding: 10px;
     box-sizing: border-box;
     }
@@ -928,8 +929,8 @@ sup {
     }
 
     .navMenu-wrapper {
-        max-width: 100%;
-        /* Limita la larghezza al massimo all'80% dello schermo */
+        width: 30%; /* ridotto rispetto all'80% attuale */
+        max-width: 30%;
         left: 10px;
         right: auto;
         transform: none;

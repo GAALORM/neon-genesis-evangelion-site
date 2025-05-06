@@ -831,7 +831,7 @@ sup {
 
     /* Layout mobile */
     .container {
-          flex-direction: row;
+        flex-direction: row;
         flex-wrap: wrap;
         gap: 10px;
     }
@@ -867,11 +867,12 @@ sup {
     }
 
     .mainContent {
-  width: 70%;
-        max-width: 70%;
-        margin: 0 auto;
-    padding: 10px;
-    box-sizing: border-box;
+       flex: 1;
+        width: auto;
+        max-width: none;
+        padding: 10px;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
     }
     
     .mainContent2,

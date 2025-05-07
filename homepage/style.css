@@ -831,7 +831,7 @@ sup {
 
     /* Layout mobile */
     .container {
-        disply: flex;
+        display: flex;
         flex-direction: row;
         gap: 10px;
     }

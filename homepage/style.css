@@ -867,9 +867,7 @@ sup {
     }
 
     .mainContent {
-        flex: 1;
-        width: auto;
-        max-width:none;
+        width: calc(70% - 10px); /* 70% meno il gap */
         padding: 10px;
         box-sizing: border-box;
         overflow-wrap: break-word;

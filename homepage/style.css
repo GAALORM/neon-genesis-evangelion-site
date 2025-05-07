@@ -867,7 +867,7 @@ sup {
     }
 
     .mainContent {
-        width: calc(70% - 10px); /* 70% meno il gap */
+        width: calc(80% - 10px); /* 70% meno il gap */
         padding: 10px;
         box-sizing: border-box;
         overflow-wrap: break-word;
@@ -928,8 +928,8 @@ sup {
     }
 
     .navMenu-wrapper {
-        width: 30%; /* ridotto rispetto all'80% attuale */
-        max-width: 30%;
+        width: 20%; /* ridotto rispetto all'80% attuale */
+        max-width: 20%;
         left: 10px;
         right: auto;
         transform: none;

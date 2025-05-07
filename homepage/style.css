@@ -831,8 +831,8 @@ sup {
 
     /* Layout mobile */
     .container {
+        disply: flex;
         flex-direction: row;
-        flex-wrap: wrap;
         gap: 10px;
     }
 
@@ -867,10 +867,9 @@ sup {
     }
 
     .mainContent {
-        width: calc(80% - 10px); /* 70% meno il gap */
+        flex-grow: 1;
         padding: 10px;
         box-sizing: border-box;
-        overflow-wrap: break-word;
     }
     
     .mainContent2,
@@ -928,8 +927,7 @@ sup {
     }
 
     .navMenu-wrapper {
-        width: 20%; /* ridotto rispetto all'80% attuale */
-        max-width: 20%;
+        width: 200px;
         left: 10px;
         right: auto;
         transform: none;
@@ -941,6 +939,7 @@ sup {
         justify-content: initial;
         align-items: initial;
         box-sizing: border-box;
+        flex-shrink: 0;
     }
 
     .navMenu {

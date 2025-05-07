@@ -927,17 +927,10 @@ sup {
     }
 
     .navMenu-wrapper {
-        width: 200px;
-        left: 10px;
-        right: auto;
-        transform: none;
+        width: 200px; /* o 25% se preferisci in % */
         background-color: rgba(71, 70, 70, 0.9);
-        /* Sfondo semi-trasparente */
         text-align: center;
         padding: 10px;
-        display: block;
-        justify-content: initial;
-        align-items: initial;
         box-sizing: border-box;
         flex-shrink: 0;
     }

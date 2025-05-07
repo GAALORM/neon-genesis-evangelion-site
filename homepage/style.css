@@ -868,8 +868,7 @@ sup {
 
     .mainContent {
        flex: 1;
-        width: auto;
-        max-width: none;
+        width: 0;
         padding: 10px;
         box-sizing: border-box;
         overflow-wrap: break-word;
@@ -942,6 +941,7 @@ sup {
         display: block;
         justify-content: initial;
         align-items: initial;
+        box-sizing: border-box;
     }
 
     .navMenu {

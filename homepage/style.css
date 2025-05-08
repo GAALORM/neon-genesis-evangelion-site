@@ -872,6 +872,8 @@ sup {
         flex-grow: 1;
         padding: 10px;
         box-sizing: border-box;
+        margin: 0;
+        max-width: 100%;
     }
 
     .mainContent2,
@@ -935,6 +937,7 @@ sup {
         text-align: center;
         padding: 10px;
         flex-shrink: 0;
+        box-sizing: border-box;
     }
 
     .navMenu {

@@ -867,13 +867,13 @@ sup {
     }
 
     .mainContent {
-       flex: 1;
-        width: 0;
+        width: 70%;
+        max-width: 70%;
+        margin: 0 auto;
         padding: 10px;
         box-sizing: border-box;
-        overflow-wrap: break-word;
     }
-    
+
     .mainContent2,
     .mainContent3 {
         width: 95%;

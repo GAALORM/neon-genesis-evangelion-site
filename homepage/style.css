@@ -831,9 +831,11 @@ sup {
 
     /* Layout mobile */
     .container {
+        display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
         gap: 10px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .container2 {
@@ -867,9 +869,7 @@ sup {
     }
 
     .mainContent {
-        width: 70%;
-        max-width: 70%;
-        margin: 0 auto;
+        flex-grow: 1;
         padding: 10px;
         box-sizing: border-box;
     }
@@ -929,19 +929,12 @@ sup {
     }
 
     .navMenu-wrapper {
-        width: 30%; /* ridotto rispetto all'80% attuale */
-        max-width: 30%;
-        left: 10px;
-        right: auto;
-        transform: none;
+        width: 200px;
+        /* o 25% se preferisci in % */
         background-color: rgba(71, 70, 70, 0.9);
-        /* Sfondo semi-trasparente */
         text-align: center;
         padding: 10px;
-        display: block;
-        justify-content: initial;
-        align-items: initial;
-        box-sizing: border-box;
+        flex-shrink: 0;
     }
 
     .navMenu {

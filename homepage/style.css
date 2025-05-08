@@ -834,6 +834,8 @@ sup {
         display: flex;
         flex-direction: row;
         gap: 10px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .container2 {
@@ -931,7 +933,6 @@ sup {
         background-color: rgba(71, 70, 70, 0.9);
         text-align: center;
         padding: 10px;
-        box-sizing: border-box;
         flex-shrink: 0;
     }
 

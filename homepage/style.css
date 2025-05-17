@@ -602,7 +602,7 @@ sup {
 }
 
 .search-bar input {
-    width: 100%;
+    width: 50%;
     padding: 10px 40px 10px 15px;
     /* Spazio interno (40px a destra per la lente) */
     border: 2px solid #ccc;

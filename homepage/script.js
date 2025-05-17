@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
         words.forEach(word => {
             if (word.length < 3) return; // Evitiamo parole troppo corte
             const similarity = 1 - levenshteinDistance(queryLower, word.toLowerCase()) / Math.max(word.length, queryLower.length);
-            if (similarity > bestSimilarity && similarity > 0.6) { // Aggiunto limite per evitare match deboli
+            if (similarity > bestSimilarity && similarity > 0.3) { // Aggiunto limite per evitare match deboli
                 bestMatch = word;
                 bestSimilarity = similarity;
             }

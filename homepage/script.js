@@ -487,32 +487,35 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/(.)\1+/g, '$1'); // Rimuove lettere doppie
     }
 
+   function fuzzySearch(query, items) {
+    if (!query) return [];
 
-    function fuzzySearch(query, items) {
-        if (!query) return [];
+    const queryLower = query.toLowerCase();
+    const metaphoneQuery = metaphone(queryLower);
 
-        const queryLower = query.toLowerCase();
+    return items
+        .map(item => {
+            const itemLower = item.toLowerCase();
+            const words = itemLower.split(/\s+/); // Divide il titolo in parole
+            const wordMatches = words.map(word => {
+                const lev = 1 - levenshteinDistance(queryLower, word) / Math.max(word.length, queryLower.length);
+                const phoneticMatch = metaphone(word) === metaphoneQuery ? 0.25 : 0;
+                return lev + phoneticMatch;
+            });
 
-        // Calcola la similarità con un algoritmo più permissivo
-        return items
-            .map(item => {
-                const itemLower = item.toLowerCase();
-                const similarity = 1 - levenshteinDistance(queryLower, itemLower) /
-                    Math.max(itemLower.length, queryLower.length);
+            const bestScore = Math.max(...wordMatches, 0);
+            const partialMatch = itemLower.includes(queryLower);
+            const bonus = partialMatch ? 0.2 : 0;
 
-                // Aggiungi bonus per corrispondenze parziali
-                const partialMatch = itemLower.includes(queryLower);
-                const similarityBonus = partialMatch ? 0.3 : 0;
-
-                return {
-                    item,
-                    similarity: similarity + similarityBonus
-                };
-            })
-            .filter(entry => entry.similarity >= 0.4) // Soglia più bassa
-            .sort((a, b) => b.similarity - a.similarity)
-            .map(entry => entry.item);
-    }
+            return {
+                item,
+                similarity: bestScore + bonus
+            };
+        })
+        .filter(entry => entry.similarity >= 0.4)
+        .sort((a, b) => b.similarity - a.similarity)
+        .map(entry => entry.item);
+}
 
     async function extractSnippetFromPage(path, query) {
         try {

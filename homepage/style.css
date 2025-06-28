@@ -826,6 +826,30 @@ sup {
     color: #E6E6E6;
 }
 
+ header {
+      background-color: #1f1f1f;
+      padding: 20px 0;
+    }
+
+    nav {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 40px; /* distanza tra i link */
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff6666;
+    }
+
 /* Adattamenti solo per mobile */
 @media (max-width: 768px) {
 

@@ -827,7 +827,6 @@ sup {
 }
 
  header {
-      background-color: #1f1f1f;
       padding: 20px 0;
     }
 
@@ -840,14 +839,9 @@ sup {
     }
 
     nav a {
-      color: white;
+      color: #669DD3;;
       text-decoration: none;
       font-size: 18px;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #ff6666;
     }
 
 /* Adattamenti solo per mobile */

@@ -49,7 +49,7 @@ body {
     /* Imposta una larghezza fluida */
     max-width: 1200px;
     /* Limita la larghezza su schermi grandi */
-    margin: auto;
+    margin: 25px auto auto auto;
     /* Centra il contenuto */
     border-radius: 20px;
     background-color: #474646;
@@ -58,7 +58,6 @@ body {
     /* Centra orizzontalmente */
     flex-direction: column;
     /* allinea i div annidati uno sotto l' altro */
-    margin-top: 25px;
     padding: 10px;
 }
 

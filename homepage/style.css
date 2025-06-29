@@ -58,6 +58,7 @@ body {
     /* Centra orizzontalmente */
     flex-direction: column;
     /* allinea i div annidati uno sotto l' altro */
+    margin-top: 25px;
     padding: 10px;
 }
 

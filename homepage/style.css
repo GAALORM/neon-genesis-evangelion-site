@@ -827,21 +827,28 @@ sup {
 }
 
  header {
-      padding: 20px 0;
+    padding: 20px 0;
     }
 
     nav {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      gap: 40px; /* distanza tra i link */
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* distanza tra i link */
     }
 
     nav a {
-      color: #669DD3;;
-      text-decoration: none;
-      font-size: 18px;
+    color: #669DD3;;
+    text-decoration: none;
+    font-size: 18px;
+    }
+
+    nav a.active {
+    font-weight: bold;
+    color: #FFFFFF;
+    pointer-events: none; /* opzionale: impedisce il clic */
+    text-decoration: underline;
     }
 
 /* Adattamenti solo per mobile */

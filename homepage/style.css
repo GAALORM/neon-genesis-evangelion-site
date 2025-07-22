@@ -13,6 +13,7 @@ body {
     margin-top: 25px;
     gap: 15px;
     /* Aggiunge uno spazio fisso tra i due div */
+    overflow: hidden;
 }
 
 .container2 {

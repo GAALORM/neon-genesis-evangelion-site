@@ -907,6 +907,12 @@ sup {
         padding: 10px;
     }
 
+    .header {
+        width:95%;
+        margin: auto;
+        padding: 10px;
+    }
+
     .h2risultati {
         font-size: 1.5rem;
         /* Riduce il titolo */

@@ -907,12 +907,6 @@ sup {
         padding: 10px;
     }
 
-    .header {
-        width:95%;
-        margin: auto;
-        padding: 10px;
-    }
-
     .h2risultati {
         font-size: 1.5rem;
         /* Riduce il titolo */
@@ -1022,5 +1016,17 @@ sup {
         max-width: 250px;
         height: auto;
     }
+
+     nav {
+        flex-wrap: wrap;           /* Consente di andare a capo */
+        justify-content: center;   /* Centra su più righe */
+        gap: 16px;                 /* Distanza tra i link */
+        padding: 0 10px;           /* Padding ai lati per non far toccare il bordo */
+  }
+
+  nav a {
+        font-size: 16px;           /* Facoltativo: testo un po’ più piccolo su mobile */
+        white-space: nowrap;       /* Fa sì che ogni link stia su una riga sola */
+  }
 
 }

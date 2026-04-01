@@ -1026,5 +1026,8 @@ sup {
         font-size: 16px;           /* Facoltativo: testo un po’ più piccolo su mobile */
         white-space: nowrap;       /* Fa sì che ogni link stia su una riga sola */
   }
-
+    
+    .sectionPartition {
+    margin-left: 10px;   /* più piccolo rispetto ai 20px desktop */
+    margin-right: 40px;  /* più piccolo rispetto ai 400px desktop */
 }

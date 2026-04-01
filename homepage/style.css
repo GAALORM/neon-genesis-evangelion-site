@@ -10,6 +10,7 @@ body {
     display: flex;
     align-items: flex-start;
     /* Allinea i div a sinistra */
+    justify-content: center;
     margin-top: 25px;
     gap: 15px;
     /* Aggiunge uno spazio fisso tra i due div */
@@ -856,8 +857,11 @@ sup {
     /* Layout mobile */
     .container {
         display: flex;
-        flex-direction: row;
-        gap: 10px;
+        flex-direction: row;      /* mantieni affiancati */
+        justify-content: center;   /* centra il gruppo orizzontalmente */
+        align-items: flex-start;   /* allinea in alto */
+        gap: 10px;                 /* distanza tra sidebar e contenuto */
+        margin-top: 25px;          /* margine uniforme */
         width: 100%;
         box-sizing: border-box;
     }
@@ -900,13 +904,14 @@ sup {
         max-width: 100%;
     }
 
-    .mainContent2,
+    .mainContent2, 
     .mainContent3 {
-        width: 95%;
-        margin: auto;
+        width: 65%;                /* prende la maggior parte dello spazio */
+        max-width: 600px;          /* non diventare troppo largo su mobile */
+        margin: 0;                 /* centrato dentro container grazie a justify-content */
         padding: 10px;
     }
-
+ 
     .h2risultati {
         font-size: 1.5rem;
         /* Riduce il titolo */
@@ -953,10 +958,12 @@ sup {
     }
 
     .navMenu-wrapper {
-        width: 200px;
+        width: 30%;
         /* o 25% se preferisci in % */
+        max-width: 250px;
         background-color: rgba(71, 70, 70, 0.9);
         text-align: center;
+        margin: 0;
         padding: 10px;
         flex-shrink: 0;
         box-sizing: border-box;

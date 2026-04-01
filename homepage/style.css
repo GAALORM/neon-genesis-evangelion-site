@@ -942,11 +942,9 @@ sup {
     .galleryEpisodi-item img,
     .galleryEventi-item img {
         width: 100%;
-        /* L'immagine si adatta alla larghezza del contenitore */
         max-width: 300px;
-        /* Evita che diventi troppo grande */
-        height: auto;
-        /* Mantiene le proporzioni */
+        aspect-ratio: 1 / 1; 
+        object-fit: cover;
     }
 
     .galleryEventi-item img {

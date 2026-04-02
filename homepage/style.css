@@ -10,9 +10,10 @@ body {
     display: flex;
     align-items: flex-start;
     /* Allinea i div a sinistra */
-    margin-top: 25px;
     gap: 15px;
     /* Aggiunge uno spazio fisso tra i due div */
+    margin-left: 150px;
+    /* spostamento globale */
 }
 
 .container2 {
@@ -32,7 +33,7 @@ body {
     /* Centra orizzontalmente */
     flex-direction: column;
     /* allinea i div annidati uno sotto l' altro */
-    margin-top: 25px;
+    margin-top: 17px;
     margin-right: 200px;
     margin-left: 25px;
     /* Valore temporaneo, sarà sovrascritto dal JavaScript */
@@ -40,7 +41,7 @@ body {
     height: auto;
     flex: 1;
     /* Occupa tutto lo spazio rimanente */
-    max-width: calc(100% - 265px);
+    max-width: calc(100% - 265px - 150px);
     /* 250px del menu + 15px di gap */
 }
 
@@ -241,7 +242,7 @@ sup {
     height: max-content;
     max-height: 400px;
     border-radius: 20px;
-    margin-top: 25px;
+    margin-top: 17px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -825,30 +826,33 @@ sup {
     color: #E6E6E6;
 }
 
- header {
+header {
     padding: 20px 0;
-    }
+}
 
-    nav {
+nav {
     max-width: 1000px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    gap: 40px; /* distanza tra i link */
-    }
+    gap: 40px;
+    /* distanza tra i link */
+}
 
-    nav a {
-    color: #669DD3;;
+nav a {
+    color: #669DD3;
+    ;
     text-decoration: none;
     font-size: 18px;
-    }
+}
 
-    nav a.active {
+nav a.active {
     font-weight: bold;
     color: #FFFFFF;
-    pointer-events: none; /* opzionale: impedisce il clic */
+    pointer-events: none;
+    /* opzionale: impedisce il clic */
     text-decoration: underline;
-    }
+}
 
 /* Adattamenti solo per mobile */
 @media (max-width: 768px) {
@@ -856,8 +860,9 @@ sup {
     /* Layout mobile */
     .container {
         display: flex;
-        flex-direction: row; 
-        gap: 10px;     /* mantieni affiancati */
+        flex-direction: row;
+        gap: 10px;
+        /* mantieni affiancati */
         width: 100%;
         box-sizing: border-box;
     }
@@ -900,13 +905,14 @@ sup {
         max-width: 100%;
     }
 
-    .mainContent2, 
+    .mainContent2,
     .mainContent3 {
         width: 95%;
-        margin: auto;             /* centrato dentro container grazie a justify-content */
+        margin: auto;
+        /* centrato dentro container grazie a justify-content */
         padding: 10px;
     }
- 
+
     .h2risultati {
         font-size: 1.5rem;
         /* Riduce il titolo */
@@ -943,7 +949,7 @@ sup {
     .galleryEventi-item img {
         width: 100%;
         max-width: 300px;
-        aspect-ratio: 1 / 1; 
+        aspect-ratio: 1 / 1;
         object-fit: cover;
     }
 
@@ -1014,19 +1020,28 @@ sup {
         height: auto;
     }
 
-     nav {
-        flex-wrap: wrap;           /* Consente di andare a capo */
-        justify-content: center;   /* Centra su più righe */
-        gap: 16px;                 /* Distanza tra i link */
-        padding: 0 10px;           /* Padding ai lati per non far toccare il bordo */
-  }
+    nav {
+        flex-wrap: wrap;
+        /* Consente di andare a capo */
+        justify-content: center;
+        /* Centra su più righe */
+        gap: 16px;
+        /* Distanza tra i link */
+        padding: 0 10px;
+        /* Padding ai lati per non far toccare il bordo */
+    }
 
-  nav a {
-        font-size: 16px;           /* Facoltativo: testo un po’ più piccolo su mobile */
-        white-space: nowrap;       /* Fa sì che ogni link stia su una riga sola */
-  }
-    
+    nav a {
+        font-size: 16px;
+        /* Facoltativo: testo un po’ più piccolo su mobile */
+        white-space: nowrap;
+        /* Fa sì che ogni link stia su una riga sola */
+    }
+
     .sectionPartition {
-    margin-left: 10px;   /* più piccolo rispetto ai 20px desktop */
-    margin-right: 40px;  /* più piccolo rispetto ai 400px desktop */
+        margin-left: 10px;
+        /* più piccolo rispetto ai 20px desktop */
+        margin-right: 40px;
+        /* più piccolo rispetto ai 400px desktop */
+    }
 }
